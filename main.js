@@ -10,6 +10,9 @@ const mobileMenu = document.querySelector('.mobile-menu');
 const shoppingCart = document.querySelector('.navbar-shopping-cart');
 const productDetail = document.querySelector('.product-detail');
 
+//Para la card del producto 
+const cardsContainer = document.querySelector('.cards-container');
+
 
 navbarEmail.addEventListener('click',toggleMenu);
 iconMenu.addEventListener('click',toggleMenuMobile);
@@ -30,3 +33,77 @@ function toggleProductDetail() {
     mobileMenu.classList.add('inactive');
     desktopMenu.classList.add('inactive');
 }
+// Creamos un constructo HTML para las cards de los productos
+// Primero debemos simular el comportamiento de una base de datos lo haremos con un array onjeto
+
+const productList = [{
+    name: 'Motorola',
+    price: 20000,
+    imagen:'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    },
+    {
+    name: 'cocacola',
+    price: 300,
+    imagen:'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    }
+];
+productList.push(
+    {
+        name: 'PUSH',
+        price: 20000,
+        imagen:'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'    
+    }
+)
+
+
+
+// }
+// <div class="product-card">
+//       <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+//       <div class="product-info">
+//          <div>
+//             <p>$120,00</p>
+//             <p>Bike</p>
+//          </div>
+//          <figure>
+//            <img src="./icons/bt_add_to_cart.svg" alt="">
+//          </figure>
+//       </div>
+// </div>
+//Creamos una funcion que reciva cualquier array y lo muestre en la tienda juas juas 
+function renderProducts(array) {
+    
+    for (product of array) {
+        const productCard = document.createElement('div');
+    productCard.classList.add('product-card');
+
+    const productImg = document.createElement('img');
+    productImg.setAttribute('src',product.imagen);
+    
+    const productInfo = document.createElement('div');
+    productInfo.classList.add('product-info');
+    
+    const productInfoDiv = document.createElement('div');
+    
+    const productPrice = document.createElement('p');
+    productPrice.innerText = '$'+ product.price;
+    
+    const productName = document.createElement('p');
+    productName.innerText = product.name;
+    
+    const figure = document.createElement('figure');
+    const iconBuy = document.createElement('img');
+    iconBuy.setAttribute('src','./icons/bt_add_to_cart.svg');
+    
+    cardsContainer.appendChild(productCard);//para llegar a Html 
+    productCard.append(productImg,productInfo);
+    productInfo.append(productInfoDiv,figure);
+    productInfoDiv.append(productPrice,productName);
+    figure.append(iconBuy);
+    console.log('dentro del for of');
+}
+
+
+}
+
+renderProducts(productList);
